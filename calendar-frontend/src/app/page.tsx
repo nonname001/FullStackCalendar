@@ -1,6 +1,11 @@
 import Image from 'next/image'
 import CalendarView from './calendarview'
 
+/**
+ * 
+ * @returns Main calendar page with Navbar and calendar content.
+ */
+
 export default function Home() {
   return (
     <div className="justify-center items-stretch bg-white flex flex-col">
