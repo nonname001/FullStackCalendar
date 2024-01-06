@@ -82,9 +82,11 @@ export default function CalendarView() {
       <div className="justify-center text-stone-800 text-center text-8xl font-bold mix-blend-multiply w-full items-stretch bg-yellow-50 px-5 max-md:max-w-full max-md:text-4xl h-auto py-2">
         <p>DECEMBER 17, 2023</p>
       </div>
-      <div className="bg-orange-300 self-center grid grid-cols-12 gap-y-5 w-full max-w-[1096px] items-stretch pl-6 pr-14 pt-12 pb-5 rounded-[29px] max-md:max-w-full max-md:px-5">
-        <TimeLabelList lower={0} upper={24} />
-        <div className="bg-amber-700 flex w-[609px] shrink-0 max-w-full flex-col ml-3 mt-1 col-start-2 col-end-3 row-start-2 row-end-5 z-10" />
+      <div className="bg-orange-300 self-center w-full max-w-[1096px] items-stretch pl-6 pr-14 pt-12 pb-5 rounded-[29px] max-md:max-w-full max-md:px-5">
+        <div className="relative grid grid-cols-12 col-span-12 gap-y-5">
+          <TimeLabelList lower={0} upper={24} />
+          <div className={`bg-amber-700 flex shrink-0 flex-col ml-3 mt-1 absolute left-[0%] top-1/2 h-1/4 w-[8.33%]`} />
+        </div>
       </div>
     </div>
   );
