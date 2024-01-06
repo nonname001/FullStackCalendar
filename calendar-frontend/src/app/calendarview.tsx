@@ -8,23 +8,9 @@ import { useState } from 'react'
 
 function TimeLabel({ label }: { label: string }) {
   return (
-    <div className="text-stone-800 text-center text-xs grow whitespace-nowrap">
+    <div className="text-stone-800 text-center text-xs grow whitespace-nowrap
+    col-start-1 col-end-1">
       {label}
-    </div>
-  );
-}
-
-/**
- * 
- * @param label The label representing the time.
- * @returns The label next to a horizontal line.
- */
-
-function HourUnit({ label }: { label: string }) {
-  return (
-    <div className="items-stretch flex justify-between gap-0 mt-8 max-md:max-w-full max-md:flex-wrap">
-      <TimeLabel label={label} />
-      <div className="bg-stone-600 self-center w-[948px] shrink-0 max-w-full h-px my-auto" />
     </div>
   );
 }
@@ -35,7 +21,8 @@ function HourUnit({ label }: { label: string }) {
  */
 
 function EventBox() {
-  return (<div className="bg-amber-700 flex w-[609px] shrink-0 max-w-full h-[26px] flex-col ml-3 mt-1 self-start" />);
+  return (<div className="bg-amber-700 flex w-[609px] shrink-0 max-w-full 
+  h-[26px] flex-col ml-3 mt-1 self-start" />);
 }
 
 /**
@@ -55,7 +42,8 @@ function IntTimeToString(hour: number) {
  * 
  * @param lower The earliest hour to be displayed.
  * @param upper The latest hour to be displayed.
- * @throws Throws error if lower or upper bounds are not between 0 and 24, or if lower bound is greater than or equal to upper bound.
+ * @throws Throws error if lower or upper bounds are not between 0 and 24, or 
+ * if lower bound is greater than or equal to upper bound.
  * @returns A list of `HourUnit` components in the given range.
  */
 
@@ -70,8 +58,16 @@ function TimeLabelList({ lower, upper }: { lower: number, upper: number }) {
     throw new Error("Lower bound must be strictly less than upper bound!");
   }
 
-  const times_num = Array.from({ length: upper - lower + 1 }, (v, i) => lower + i);
-  const tllist = times_num.map((hour) => <HourUnit label={IntTimeToString(hour)} />);
+  const times_num = Array.from(
+    { length: (upper - lower + 1) * 2 }, (v, i) => i % 2 === 0 ? lower + i / 2
+      : -1 * i
+  );
+  const tllist = times_num.map(
+    (v) => v < 0 ?
+      <div className={`horizontal-line justify-start border-t border-black z-0
+      col-start-2 col-end-13 row-start-${Math.floor(-1 * v / 2) + 1} row-span-1`} />
+      : <TimeLabel label={IntTimeToString(v)} />
+  );
   return tllist;
 }
 
@@ -86,8 +82,11 @@ export default function CalendarView() {
       <div className="justify-center text-stone-800 text-center text-8xl font-bold mix-blend-multiply w-full items-stretch bg-yellow-50 px-5 max-md:max-w-full max-md:text-4xl h-auto py-2">
         <p>DECEMBER 17, 2023</p>
       </div>
-      <div className="bg-orange-300 self-center flex w-full max-w-[1096px] flex-col items-stretch pl-6 pr-14 pt-12 pb-5 rounded-[29px] max-md:max-w-full max-md:px-5">
-        <TimeLabelList lower={0} upper={24} />
+      <div className="bg-orange-300 self-center w-full max-w-[1096px] items-stretch pl-6 pr-14 pt-12 pb-5 rounded-[29px] max-md:max-w-full max-md:px-5">
+        <div className="relative grid grid-cols-12 col-span-12 gap-y-5">
+          <TimeLabelList lower={0} upper={24} />
+          <div className={`bg-amber-700 flex shrink-0 flex-col ml-3 mt-1 absolute left-[7.5%] top-1/2 h-1/4 w-[8.33%]`} />
+        </div>
       </div>
     </div>
   );
