@@ -85,7 +85,7 @@ export default function CalendarView() {
       <div className="bg-orange-300 self-center w-full max-w-[1096px] items-stretch pl-6 pr-14 pt-12 pb-5 rounded-[29px] max-md:max-w-full max-md:px-5">
         <div className="relative grid grid-cols-12 col-span-12 gap-y-5">
           <TimeLabelList lower={0} upper={24} />
-          <div className={`bg-amber-700 flex shrink-0 flex-col ml-3 mt-1 absolute left-[0%] top-1/2 h-1/4 w-[8.33%]`} />
+          <div className={`bg-amber-700 flex shrink-0 flex-col ml-3 mt-1 absolute left-[7.5%] top-1/2 h-1/4 w-[8.33%]`} />
         </div>
       </div>
     </div>
